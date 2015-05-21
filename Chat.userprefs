@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/NickName.cs">
+    <Files>
+      <File FileName="Assets/Mult/Client.cs" Line="165" Column="1" />
+      <File FileName="Assets/Mult/Server.cs" Line="59" Column="79" />
+      <File FileName="Assets/ServerChat.cs" Line="1" Column="1" />
+      <File FileName="Assets/Users.cs" Line="55" Column="6" />
+      <File FileName="Assets/NickName.cs" Line="34" Column="51" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
