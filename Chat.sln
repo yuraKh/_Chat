@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{55DCDF01-7B51-FC96-F7B5-F9D63013B95D}") = "Chat", "Assembly-CSharp-firstpass.csproj", "{3C8473AD-1E2E-0BAA-C7F8-9E66294BC5AC}"
+EndProject
 Project("{55DCDF01-7B51-FC96-F7B5-F9D63013B95D}") = "Chat", "Assembly-CSharp.csproj", "{BEAEB153-AF1B-2D23-F70B-388BA67B766A}"
 EndProject
 Project("{55DCDF01-7B51-FC96-F7B5-F9D63013B95D}") = "Chat", "Assembly-UnityScript.unityproj", "{11F645B8-2E66-9B5D-420C-A9B9DB4A696E}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C8473AD-1E2E-0BAA-C7F8-9E66294BC5AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C8473AD-1E2E-0BAA-C7F8-9E66294BC5AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C8473AD-1E2E-0BAA-C7F8-9E66294BC5AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C8473AD-1E2E-0BAA-C7F8-9E66294BC5AC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BEAEB153-AF1B-2D23-F70B-388BA67B766A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BEAEB153-AF1B-2D23-F70B-388BA67B766A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEAEB153-AF1B-2D23-F70B-388BA67B766A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,7 +29,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																											GlobalSection(MonoDevelopProperties) = preSolution
+																																			GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

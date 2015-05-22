@@ -19,6 +19,16 @@ public class Users : MonoBehaviour
 		netView = GetComponent<NetworkView> ();
 	}
 
+	void OnGUI ()
+	{
+		if (netView.isMine) {
+			massage = GUI.TextField (new Rect ((Screen.width - 80) / 2, Screen.height / 2 + 40, 140, 30), massage);
+			if (GUI.Button (new Rect ((Screen.width - 70) / 2, Screen.height / 2 + 70, 40, 30), "ok")) {
+				ifMas = true;
+			}
+		}
+	}
+
 	
 	void OnSerializeNetworkView (BitStream stream, NetworkMessageInfo info)
 	{

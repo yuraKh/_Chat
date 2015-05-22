@@ -12,6 +12,7 @@ public class Server : MonoBehaviour
 	public bool connected;			// Статус підключення
 	private GameObject _go;			// силка на гравця
 	public bool _visible = false;	// Статус виведення меню
+	public static bool ifServer = false;
 
 
 	void Update ()
@@ -47,17 +48,21 @@ public class Server : MonoBehaviour
 			port = GUI.TextField (new Rect ((Screen.width - 100) / 2 + 35, Screen.height / 2 - 30, 50, 20), port);
 			nickname = GUI.TextField (new Rect ((Screen.width - 100) / 2 + 35, Screen.height / 2, 100, 20), nickname);
 			
-			if (GUI.Button (new Rect ((Screen.width - 110) / 2, Screen.height / 2 + 35, 110, 30), "Присоединиться"))
+			if (GUI.Button (new Rect ((Screen.width - 110) / 2, Screen.height / 2 + 35, 110, 30), "Присоединиться")) {
 				// Підключення до сервера
 				Network.Connect (ip, Convert.ToInt32 (port));
+				ifServer = false;
+			}
 			
-			if (GUI.Button (new Rect ((Screen.width - 110) / 2, Screen.height / 2 + 70, 110, 30), "Создать сервер"))
+			if (GUI.Button (new Rect ((Screen.width - 110) / 2, Screen.height / 2 + 70, 110, 30), "Создать сервер")) {
 				// Створення сервера(кількість підключень до сервера, 
 				// порт на якомо створити сервер, підключення через посредників)
 				Network.InitializeServer (10, Convert.ToInt32 (port), false);
-			
-			if (GUI.Button (new Rect ((Screen.width - 110) / 2, Screen.height / 2 + 105, 110, 30), "Выход"))
+				ifServer = true;
+			}
+			if (GUI.Button (new Rect ((Screen.width - 110) / 2, Screen.height / 2 + 105, 110, 30), "Выход")) {
 				Application.Quit ();
+			}
 		}
 	}
 	

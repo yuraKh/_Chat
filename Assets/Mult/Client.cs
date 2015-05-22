@@ -39,14 +39,27 @@ public class Client: MonoBehaviour
 	private Vector3 syncStartPosition = Vector3.zero;
 	private Vector3 syncEndPosition = Vector3.zero;
 
+
 	//Змінні для сериалізації (синхронізації)
 	private Quaternion rot;	// кут повороту
 	private int numCurAnim;	// номер анімації для сереалізації 0 - стан спокою, 1 - хотьби 2 - бігу, 3 - прижка 
-		
 
+	// Nickname drow
+	public string npc_name;
+	char[] cArray = new char[20];
+	int arrL;	
+	float nameplankahgt = 1f;
+
+	// Damage and HP
+	int HP = 5, MaxHP = 5;
+	public bool showBar;			
+	public Texture bar;
+    
 	void Awake ()
 	{
-
+		if (GetComponent< NetworkView> ().isMine) {
+			npc_name = GameObject.Find ("Camera").GetComponent<Server> ().nickname;
+		}
 		cam = transform.GetComponentInChildren<Camera> ().GetComponent<Camera> ();
 
 		controller = GetComponent<CharacterController> ();
@@ -140,6 +153,34 @@ public class Client: MonoBehaviour
 			SyncedMovement ();
 		}
 	}
+	void OnGUI ()
+	{
+		Vector3 pos = new Vector3 (transform.position.x, transform.position.y + nameplankahgt, transform.position.z);
+		Vector3 posHP = new Vector3 (transform.position.x, transform.position.y + nameplankahgt, transform.position.z);
+		Vector3 crd = Camera.main.WorldToScreenPoint (pos);
+		crd.y = Screen.height - crd.y;
+		GUIStyle style = new GUIStyle ();
+		style.fontSize = 12;//Размер 12
+		style.normal.textColor = Color.red;//Красный цвет
+		style.alignment = TextAnchor.MiddleCenter;
+		GUI.Label (new Rect (crd.x - 120, crd.y, 240, 18), npc_name, style);// X позиция, Y позиция, ширина, высота
+
+
+		float dlina = 35 * (HP / MaxHP);
+		if ((dlina < 35) && (dlina > 0)) {
+			showBar = true;
+		}
+		if (showBar == true) {
+			if (dlina <= 0) {
+				showBar = false;
+			} else {
+				Vector3 screenPos = Camera.main.WorldToScreenPoint (transform.position);
+				GUI.DrawTexture (new Rect (crd.x - 120, crd.y - 25, dlina, 1f), bar);
+			}
+		}
+
+
+	}
 	
 	// Викликається в певні моменти часу та відповідає за 
 	// сереалізацію змінних
@@ -151,7 +192,13 @@ public class Client: MonoBehaviour
 		if (stream.isWriting) {
 			rot = transform.rotation;
 			syncPosition = transform.position;
-			
+
+			cArray = npc_name .ToCharArray ();
+			arrL = cArray.Length;
+			stream.Serialize (ref arrL);
+			for (int i=0; i<arrL; i++) {
+				stream.Serialize (ref cArray [i]);
+			}
 			stream.Serialize (ref syncPosition);
 			stream.Serialize (ref rot);
 			stream.Serialize (ref numCurAnim);
@@ -159,6 +206,12 @@ public class Client: MonoBehaviour
 		// В протилежному випадку, якщо персонаш не наш, то 
 		// читаємо координати з сервера 
 		else {
+			npc_name = "";
+			stream.Serialize (ref arrL);
+			for (int i=0; i<arrL; i++) {
+				stream.Serialize (ref cArray [i]);
+				npc_name += cArray [i];
+			}
 			stream.Serialize (ref syncPosition);
 			stream.Serialize (ref rot);
 			stream.Serialize (ref numCurAnim);
